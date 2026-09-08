@@ -1,5 +1,5 @@
 from flask import Flask
-from blueprint.general import general
+from blueprint.general import app as general
 
 app = Flask(__name__)
 

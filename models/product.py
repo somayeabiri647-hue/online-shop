@@ -8,3 +8,4 @@ class product(db.Model):
     name = column(String, unique = True, nullable = False, index = True)
     description = column(String(11), nullable = False, index = True)
     price = column(Integer, nullable = False, index = True)
+    active = column(Integer, nullable = False, index = True)

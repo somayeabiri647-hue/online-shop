@@ -29,11 +29,11 @@ def login():
 
 @app.route("/admin/dashboard/")
 def dashboard():    
-    return "dashboard"
+    return render_template('admin/dashboard.html')
 
 
 
 
 @app.route("/admin/dashboard/products")
 def products():
-    return "products"
+    return render_template('admin/products.html')

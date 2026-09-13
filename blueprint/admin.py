@@ -42,7 +42,7 @@ def dashboard():
 def products():
     if request.method == "GET":
         products = product.query.all() 
-        return render_template('admin/products.html', products=products)
+        return render_template("admin/products.html", products=products)
     else:
         name = request.form.get("name" , None)
         description = request.form.get("description" , None)

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block header%}
+    <title>فروشگاه اینترنتی علی اصغر</title>
+{% endblock %}
+{% block body%}
+
+    {% for p in products %}
+    <a href="{{ url_for('general.product_page', id=p.id, name=p.name) }}">{{ p.name }}</a>
+    {% endfor %}
+
+{% endblock %}

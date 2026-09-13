@@ -10,11 +10,16 @@
     <th>توضیحات</th>
     <th>قیمت</th>
     <th>فعال</th>
+
 </tr>
 
-{% for p in products%}
+{% for p in products %}
     <tr>
-    <td></td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.description }}</td>
+        <td>{{ p.price }}</td>
+        <td>{{ "yes" if p.active == 1 else "no" }}</td>
+        
     </tr>
 {% endfor %}
 

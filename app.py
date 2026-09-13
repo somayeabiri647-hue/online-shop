@@ -23,4 +23,4 @@ with app.app_context():
     extention.db.create_all()
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

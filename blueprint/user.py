@@ -18,7 +18,13 @@ def login():
         phone = request.form.get("phone", None)
         address = request.form.get("address", None)
 
-        if request != None:
+        if register != None:
+            user = User.query.filter(User.username == username).first()
+            if user != None:
+                flash("این نام کاربری قبلا استفاده شده است")
+                return redirect(url_for("user.login"))
+
+
             user = User(username = username , password= sha256_crypt.encrypt(password) , phone = phone , address = address)
             db.session.add(user)
             db.session.commit()
@@ -32,6 +38,13 @@ def login():
                 flash("نام کاربری یا رمز اشتباه است")
                 return redirect(url_for("user.login"))
 
-            if sha256_crypt.ve 
+            if sha256_crypt.verify(password, user.password):
+                login_user(user)
+                return redirect("/user/dashboard")
+            else:
+                flash("نام کاربری یا رمز اشتباه است")
+                return redirect(url_for("user.login"))
+
+
     
         return "ok"

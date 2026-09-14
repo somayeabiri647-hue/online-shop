@@ -3,7 +3,8 @@ import config
 from models.product import product
 from extention import db
 from models.product import product as Product
-
+import os
+from flask import current_app
 
 app = Blueprint("admin", __name__)
 
@@ -48,7 +49,7 @@ def products():
         description = request.form.get("description" , None)
         price = request.form.get("price" , None)
         active = request.form.get("active" , None)
-
+        file = request.files.get("cover", None)
 
 
         p = product(name=name, description=description, price=price)
@@ -61,6 +62,7 @@ def products():
         db.session.add(p)
         db.session.commit()
 
+        file.save(f"./static/cover/{p.id}.jpg")
         return "done"
 
 
@@ -76,6 +78,9 @@ def edit_product(id):
         description = request.form.get("description" , None)
         price = request.form.get("price" , None)
         active = request.form.get("active" , None)
+        file = request.files.get("cover", None)
+       
+
 
         product.name = name
         product.description = description
@@ -88,4 +93,9 @@ def edit_product(id):
 
         db.session.commit()
 
+        if file != None :
+            file.save(f"static/cover/{product.id}.jpg")
+
         return redirect(url_for("admin.edit_product" , id=id))
+
+    

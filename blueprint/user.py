@@ -53,10 +53,7 @@ def login():
         return "ok"
 
 
-@app.route("/user/dashboard" , methods = ["GET"])
-@login_required
-def dashboard():
-    return "Here is the dashboard"
+
 
 @app.route("/add-to-cart", methods=["GET"])
 @login_required
@@ -64,25 +61,38 @@ def add_to_cart():
     id = request.args.get("id")
     product = Product.query.filter(Product.id == id).first_or_404()
 
-    check_cart = Cart.query.filter(
+    cart = Cart.query.filter(
         Cart.user_id == current_user.id,
         Cart.status == "pending"
     ).first()
 
-    if check_cart == None:
+    if cart == None:
         cart = Cart()
         current_user.carts.append(cart)
+        db.session.add(cart)
+        
+        
+       
 
+    cart_item = cart.cart_items.filter(CartItem.product == product).first()
+    if cart_item == None:
         item = CartItem(quantity = 1)
         item.cart = cart
         item.product = product
-
         db.session.add(item)
-        db.session.add(cart)
-        
     else:
-        pass
-
+        cart_item.quantity += 1
     db.session.commit()
 
-    return "done"
+    return redirect(url_for("user.cart"))
+
+@app.route("/cart" , methods = ["GET"])
+@login_required
+def cart():
+    return render_template("user/cart.html")
+
+
+@app.route("/user/dashboard" , methods = ["GET"])
+@login_required
+def dashboard():
+    return "Here is the dashboard"

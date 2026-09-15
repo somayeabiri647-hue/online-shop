@@ -1,8 +1,11 @@
-from flask import Blueprint, render_template , request , redirect , url_for , flash
-from flask_login import login_user
+from flask import Blueprint, render_template , request , redirect , url_for , flash 
+from flask_login import login_user , current_user , login_required
 from passlib.hash import sha256_crypt
 from models.user import User
 from extention import db
+from models.cart import Cart 
+from models.cart_item import CartItem
+from models.product import product as Product
 
 
 app = Blueprint("user", __name__)
@@ -51,5 +54,35 @@ def login():
 
 
 @app.route("/user/dashboard" , methods = ["GET"])
+@login_required
 def dashboard():
     return "Here is the dashboard"
+
+@app.route("/add-to-cart", methods=["GET"])
+@login_required
+def add_to_cart():
+    id = request.args.get("id")
+    product = Product.query.filter(Product.id == id).first_or_404()
+
+    check_cart = Cart.query.filter(
+        Cart.user_id == current_user.id,
+        Cart.status == "pending"
+    ).first()
+
+    if check_cart == None:
+        cart = Cart()
+        current_user.carts.append(cart)
+
+        item = CartItem(quantity = 1)
+        item.cart = cart
+        item.product = product
+
+        db.session.add(item)
+        db.session.add(cart)
+        
+    else:
+        pass
+
+    db.session.commit()
+
+    return "done"

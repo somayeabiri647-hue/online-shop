@@ -9,6 +9,7 @@ class CartItem(db.Model):
     product_id = Column(Integer , ForeignKey("product.id"), nullable = False )
     cart_id = Column(Integer , ForeignKey("carts.id"), nullable = False )
     quantity =Column(Integer)
+    price =Column(Integer)
 
     product = db.relationship("product" , backref = "cart_items")
     cart = db.relationship("Cart" , backref = backref("cart_items" , lazy = "dynamic"))

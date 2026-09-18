@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask , redirect , url_for , flash
 from flask_wtf.csrf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
 from blueprint.general import app as general
@@ -26,6 +26,11 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    flash("اول وارد شوید")
+    return redirect(url_for("user.login"))
 
 
 with app.app_context():

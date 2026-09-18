@@ -101,14 +101,15 @@ def remove_from_cart():
         cart_item.quantity -= 1
     else:
         db.session.delete(cart_item)
-    db.session.commit()
 
+    db.session.commit()
     return redirect(url_for("user.cart"))
 
 @app.route("/cart" , methods = ["GET"])
 @login_required
 def cart():
-    return render_template("user/cart.html")
+    cart = current_user.carts.filter(Cart.status == "pending").first()
+    return render_template("user/cart.html", cart=cart)
 
 
 @app.route("/user/dashboard" , methods = ["GET"])

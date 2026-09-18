@@ -105,12 +105,18 @@ def remove_from_cart():
     db.session.commit()
     return redirect(url_for("user.cart"))
 
+
+
 @app.route("/cart" , methods = ["GET"])
 @login_required
 def cart():
     cart = current_user.carts.filter(Cart.status == "pending").first()
     return render_template("user/cart.html", cart=cart)
 
+@app.route("/payment" , methods = ["GET"])
+@login_required
+def payment():
+    pass
 
 @app.route("/user/dashboard" , methods = ["GET"])
 @login_required

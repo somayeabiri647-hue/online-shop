@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template , request , redirect , url_for , flash 
+from flask import Blueprint, render_template , request , redirect , url_for , flash
 from flask_login import login_user , current_user , login_required
 from passlib.hash import sha256_crypt
 from models.user import User
@@ -6,7 +6,8 @@ from extention import db
 from models.cart import Cart 
 from models.cart_item import CartItem
 from models.product import product as Product
-
+from models.payment import Payment
+import requests
 
 app = Blueprint("user", __name__)
 
@@ -116,7 +117,26 @@ def cart():
 @app.route("/payment" , methods = ["GET"])
 @login_required
 def payment():
-    pass
+    r = requests.post("https://sandbox.shepa.com/api/v1/token",
+                       data={
+                            "api" : "sandbox",
+                            "amount" : 10000,
+                            "callback": "https://localhost:5000/verify"
+                        })
+
+    tokan = r.json()["result"]["token"]
+    url = r.json()["result"]["url"]
+
+    cart = current_user.carts.filter(Cart.status == "pending").first()
+    pay = Payment(
+    price=cart.total_price(),
+    token=tokan,
+    cart_id=cart.id
+)
+    db.session.add(pay)
+    db.session.commit()
+
+    return redirect(url)
 
 @app.route("/user/dashboard" , methods = ["GET"])
 @login_required

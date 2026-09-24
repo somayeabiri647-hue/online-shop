@@ -117,24 +117,45 @@ def cart():
 @app.route("/payment" , methods = ["GET"])
 @login_required
 def payment():
+    cart = current_user.carts.filter(Cart.status == "pending").first()
+
     r = requests.post("https://sandbox.shepa.com/api/v1/token",
                        data={
                             "api" : "sandbox",
-                            "amount" : 10000,
+                            "amount" : cart.total_price(),
                             "callback": "https://localhost:5000/verify"
                         })
 
     tokan = r.json()["result"]["token"]
     url = r.json()["result"]["url"]
 
-    cart = current_user.carts.filter(Cart.status == "pending").first()
-    pay = Payment(
-    price=cart.total_price(),
-    token=tokan,
-    cart_id=cart.id
-)
+    
+    pay = Payment( price=cart.total_price(),token=tokan)
+    pay.cart = cart
     db.session.add(pay)
     db.session.commit()
+
+    return redirect(url)
+
+
+@app.route("/verify" , methods = ["GET"])
+@login_required
+def verify():
+    token = request.args.get("token")
+    pay = Payment.query.filter(payment.token == token).first_or_404()
+
+
+    r = requests.post("https://sandbox.shepa.com/v1/verify",
+                       data={
+                            "api" : "sandbox",
+                            "amount" : pay.price,
+                            "token": token
+                        })
+
+    tokan = r.json()["result"]["token"]
+    url = r.json()["result"]["url"]
+
+    
 
     return redirect(url)
 

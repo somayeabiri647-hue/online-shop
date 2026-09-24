@@ -123,7 +123,7 @@ def payment():
                        data={
                             "api" : "sandbox",
                             "amount" : cart.total_price(),
-                            "callback": "https://localhost:5000/verify"
+                            "callback": "http://localhost:5000/verify"
                         })
 
     tokan = r.json()["result"]["token"]
@@ -142,22 +142,35 @@ def payment():
 @login_required
 def verify():
     token = request.args.get("token")
-    pay = Payment.query.filter(payment.token == token).first_or_404()
+    pay = Payment.query.filter(Payment.token == token).first_or_404()
 
 
-    r = requests.post("https://sandbox.shepa.com/v1/verify",
+    r = requests.post("https://sandbox.shepa.com/api/v1/verify",
                        data={
                             "api" : "sandbox",
                             "amount" : pay.price,
                             "token": token
                         })
 
-    tokan = r.json()["result"]["token"]
-    url = r.json()["result"]["url"]
+    pay_status = r.json()["success"]
+    if pay_status == "true" :
+        transaction_id = r.json()["result"]["transaction_id"]
+        refid = r.json()["result"]["refid"]
+        card_pan = r.json()["result"]["card_pan"]
 
+
+        pay.card_pan = card_pan
+        pay.transaction_id = transaction_id
+        pay.refid = refid
+        pay.status = "success"
+        pay.cart.status = "paid"
+    else:
+        pay_status = "failed"
+
+    db.session.commit()
     
 
-    return redirect(url)
+    return redirect(url_for("user.dashboard"))
 
 @app.route("/user/dashboard" , methods = ["GET"])
 @login_required

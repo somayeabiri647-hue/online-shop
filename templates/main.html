@@ -4,6 +4,18 @@
 {% endblock %}
 {% block body%}
 
+    <header>
+        <img src="{{ url_for("static", filename = "image/logo.png" ) }}" alt="aliasghar">
+        <section>
+            <a href="#">صفحه اصلی</a>
+            <a href="#">محصولات جدید</a>
+            <a href="#">درباره ما</a>
+            <a href="#">محصولات پرفروش</a>
+        </section>
+    </header>
+
+
+
     {% for p in products %}
     <a href="{{ url_for('general.product_page', id=p.id, name=p.name) }}">{{ p.name }}</a>
     {% endfor %}

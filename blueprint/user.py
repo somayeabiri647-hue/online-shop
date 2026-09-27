@@ -8,6 +8,9 @@ from models.cart_item import CartItem
 from models.product import product as Product
 from models.payment import Payment
 import requests
+import config
+
+
 
 app = Blueprint("user", __name__)
 
@@ -119,11 +122,11 @@ def cart():
 def payment():
     cart = current_user.carts.filter(Cart.status == "pending").first()
 
-    r = requests.post("https://sandbox.shepa.com/api/v1/token",
+    r = requests.post(config.PAYMENT_FIRST_REQUEST_URL,
                        data={
                             "api" : "sandbox",
                             "amount" : cart.total_price(),
-                            "callback": "http://localhost:5000/verify"
+                            "callback": config.PAYMENT_CALLBACK
                         })
 
     tokan = r.json()["result"]["token"]
@@ -145,15 +148,15 @@ def verify():
     pay = Payment.query.filter(Payment.token == token).first_or_404()
 
 
-    r = requests.post("https://sandbox.shepa.com/api/v1/verify",
+    r = requests.post(config.PAYMENT_VERIFY_REQUEST_URL,
                        data={
-                            "api" : "sandbox",
+                            "api" : config.PAYMENT_MERCHANT,
                             "amount" : pay.price,
                             "token": token
                         })
 
-    pay_status = r.json()["success"]
-    if pay_status == "true" :
+    pay_status = bool(r.json()["success"])
+    if pay_status:
         transaction_id = r.json()["result"]["transaction_id"]
         refid = r.json()["result"]["refid"]
         card_pan = r.json()["result"]["card_pan"]
@@ -164,7 +167,9 @@ def verify():
         pay.refid = refid
         pay.status = "success"
         pay.cart.status = "paid"
+        flash("پرداخت با موفقیت انجام شد")
     else:
+        flash("پرداخت انجام نشد لطفا دوباره تلاش کنید")
         pay_status = "failed"
 
     db.session.commit()

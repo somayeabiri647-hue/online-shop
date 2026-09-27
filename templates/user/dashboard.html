@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <title>پنل کاربری</title>
+{% endblock %}
+{% block body %}
+
+    {% for cart in current_user.carts|selectattr("status", "!=", "pending") %}
+        {{ cart.status }}{{ cart.cart_items[0].product.name }}
+    {% endfor %}
+{% endblock %}
+
+  

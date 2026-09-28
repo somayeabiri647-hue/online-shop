@@ -6,20 +6,33 @@
 
     <header>
         <section>
-            <img src="{{ url_for("static", filename = "image/logo.png" ) }}" alt="aliasghar">
-        <div>
-            <a href="#">صفحه اصلی</a>
-            <a href="#">محصولات جدید</a>
-            <a href="#">درباره ما</a>
-            <a href="#">محصولات پرفروش</a>
-        </div>
+            <img src="{{ url_for('static', filename='image/logo.png') }}" alt="aliasghar">
+            <div>
+                <a href="#">صفحه اصلی</a>
+                <a href="#">محصولات جدید</a>
+                <a href="#">درباره ما</a>
+                <a href="#">محصولات پرفروش</a>
+            </div>
         </section>
     </header>
 
+    <section class="products">
+        {% for p in products %}
+            <section class="product-box">
+                <img src="{{ url_for('static', filename='cover/' ~ p.id ~ '.jpg') }}" alt="{{ p.name }}">
+                <h3>{{ p.name }}</h3>
+                <p>{{ p.description|truncate(60) }}</p>
 
+                <a class="blue" href="{{ url_for('general.product_page', id=p.id, name=p.name) }}">
+                    توضیحات بیشتر
+                </a>
 
-    {% for p in products %}
-    <a href="{{ url_for('general.product_page', id=p.id, name=p.name) }}">{{ p.name }}</a>
-    {% endfor %}
-
+                <div>
+                    <a href="/add-to-cart?id={{ p.id }}">
+                        افزودن به سبد خرید
+                    </a>
+                </div>
+            </section>
+        {% endfor %}
+    </section>
 {% endblock %}

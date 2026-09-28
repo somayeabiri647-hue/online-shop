@@ -76,7 +76,7 @@ body {
     margin: 0;
     font-size: 16px;
     background-color: #E0E0E0;
-    color: #212121;
+    color: #363636;
     font-family: Vazirmatn;
 }
 
@@ -91,17 +91,19 @@ header  img  {
 }
 header > section {
     width: 100%;
-    max-width: 800px;
-    height: 38px;
+    max-width: 1000px;
+    height: 56px;
     margin: auto;
-    margin-top: 30.5px;
-    padding: 10px 21px;
+    margin-top: 32px;
+    padding: 18px 21px;
+
+
 border-radius: 72px;
 background: #E0E0E0;
 box-shadow: 9px 9px 18px #9d9d9d,
             -9px -9px 18px #ffffff;
 }
-header > div {
+header  div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,8 +111,8 @@ header > div {
 }
 
 header a {
-    font-size: 22px;
-    color: black;
+    font-size: 25px;
+    color: #1a1a1a;
     text-decoration: none;
     font-weight: 900;
     margin: 0 10px 0;
@@ -119,4 +121,86 @@ header a {
 
 header a:hover {
     text-decoration: underline;
+}
+
+.products {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
+.product-box {
+    max-width: 350px;
+    margin: 10px;
+    border-radius: 36px;
+    background: #e0e0e0;
+    box-shadow: 5px 5px 10px #bebebe,
+                -5px -5px 10px #ffffff;
+    padding-bottom: 15px;
+    text-align: right;          /* چون RTL هست، right یعنی سر خط */
+    direction: rtl;
+}
+
+.product-box > img {
+    width: 100%;
+    border-top-right-radius: inherit;
+    border-top-left-radius: inherit;
+    display: block;
+}
+
+.product-box > h3 {
+    margin: 10px 10px 5px;
+    text-align: right;
+}
+
+.product-box > p {
+    font-size: 16px;
+    margin: 0 10px 10px;
+    color: #555;
+    text-align: right;
+}
+
+/* لینک «توضیحات بیشتر» - بدون باکس، سر خط */
+.product-box > a.blue {
+    display: block;
+    color: #1a4fff;
+    text-decoration: underline;
+    font-size: 14px;
+    background: none;
+    border: none;
+    margin: 10px 10px 0;   /* ← margin-top اضافه شد */
+    padding: 0;
+    text-align: right;
+}
+
+.product-box > a.blue:hover {
+    color: #0033cc;
+}
+
+
+.product-box > div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 15px;
+    padding: 0 10px;
+}
+
+
+.product-box > div > a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 12px 35px;      /* ← این خط رو تغییر بده */
+    color: #000;
+    font-size: 16px;         /* ← و این خط */
+    font-weight: 500;
+    border-radius: 25px;
+    background: #9be89b;
+    border: none;
+}
+
+.product-box > div > a:hover {
+    background: #7fd87f;
 }

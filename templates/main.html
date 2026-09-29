@@ -6,7 +6,7 @@
 
     <header>
         <section>
-            <img src="{{ url_for('static', filename='image/logo.png') }}" alt="aliasghar">
+            <img src="{{ url_for('static', filename='image/aliasghar.png') }}" alt="aliasghar">
             <div>
                 <a href="#">صفحه اصلی</a>
                 <a href="#">محصولات جدید</a>
@@ -20,6 +20,11 @@
         {% for p in products %}
             <section class="product-box">
                 <img src="{{ url_for('static', filename='cover/' ~ p.id ~ '.jpg') }}" alt="{{ p.name }}">
+                <span class="tag"><img src="{{ url_for("static", filename = "theme-image/delivery.png" ) }}">ارسال رایگان</span>
+                <span class="tag"><img src="{{ url_for("static", filename = "theme-image/done.png" ) }}">ضمانت اصالت</span>
+                
+                
+                
                 <h3>{{ p.name }}</h3>
                 <p>{{ p.description|truncate(60) }}</p>
 
@@ -27,8 +32,8 @@
                     توضیحات بیشتر
                 </a>
 
-                <div style="float: right;">
-                    <a href="/add-to-cart?id={{ p.id }}"><img src="{{ url_for("static", filename = "theme-image/cart.png" ) }}"> افزودن به</a>
+                <div style="float: left;">
+                    <a href="/add-to-cart?id={{ p.id }}">افزودن به <img src="{{ url_for("static", filename = "theme-image/cart.png" ) }}"></a>
                 </div>
             </section>
         {% endfor %}

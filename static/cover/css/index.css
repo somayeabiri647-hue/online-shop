@@ -211,7 +211,19 @@ header a:hover {
 .product-box > div > a:hover {
     background: #7fd87fc9;
 }
+a {
+    display: flex;
+    align-items: center;
+}
+
 
 a > img {
-    width: 50px;
+    width: 23px;
+    margin-right: 5px;
+    position: relative;
+    top: 5px; 
+}
+
+.tag {
+    width: 70px;
 }

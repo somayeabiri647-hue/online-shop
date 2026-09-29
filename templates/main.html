@@ -23,14 +23,12 @@
                 <h3>{{ p.name }}</h3>
                 <p>{{ p.description|truncate(60) }}</p>
 
-                <a class="blue" href="{{ url_for('general.product_page', id=p.id, name=p.name) }}">
+                    <a class="blue" href="{{ url_for('general.product_page', id=p.id, name=p.name) }}">
                     توضیحات بیشتر
                 </a>
 
-                <div>
-                    <a href="/add-to-cart?id={{ p.id }}">
-                        افزودن به سبد خرید
-                    </a>
+                <div style="float: right;">
+                    <a href="/add-to-cart?id={{ p.id }}"><img src="{{ url_for("static", filename = "theme-image/cart.png" ) }}"> افزودن به</a>
                 </div>
             </section>
         {% endfor %}

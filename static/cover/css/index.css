@@ -70,6 +70,10 @@
   font-display: swap;
 }
 
+* {
+    transition: all 300ms ease-in-out;
+}
+
 
 body {
     padding: 0;
@@ -124,21 +128,24 @@ header a:hover {
 }
 
 .products {
+    max-width: 847px;
     display: flex;
+    margin: auto;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     margin-top: 20px;
 }
 
 
 .product-box {
     max-width: 350px;
-    margin: 10px;
+    margin: 12px;
     border-radius: 36px;
     background: #e0e0e0;
     box-shadow: 5px 5px 10px #bebebe,
                 -5px -5px 10px #ffffff;
-    padding-bottom: 15px;
+    padding-bottom: 16px;
     text-align: right;          /* چون RTL هست، right یعنی سر خط */
     direction: rtl;
 }
@@ -202,5 +209,9 @@ header a:hover {
 }
 
 .product-box > div > a:hover {
-    background: #7fd87f;
+    background: #7fd87fc9;
+}
+
+a > img {
+    width: 50px;
 }

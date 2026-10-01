@@ -20,8 +20,8 @@
         {% for p in products %}
             <section class="product-box">
                 <img src="{{ url_for('static', filename='cover/' ~ p.id ~ '.jpg') }}" alt="{{ p.name }}">
-                <span class="tag"><img src="{{ url_for("static", filename = "theme-image/delivery.png" ) }}">ارسال رایگان</span>
-                <span class="tag"><img src="{{ url_for("static", filename = "theme-image/done.png" ) }}">ضمانت اصالت</span>
+                <span class="tag red"><img src="{{ url_for("static", filename = "theme-image/delivery.png" ) }}">ارسال رایگان</span>
+                <span class="tag blue"><img src="{{ url_for("static", filename = "theme-image/done.png" ) }}">ضمانت اصالت</span>
                 
                 
                 

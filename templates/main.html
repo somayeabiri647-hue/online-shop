@@ -3,39 +3,10 @@
     <title>فروشگاه اینترنتی علی اصغر</title>
 {% endblock %}
 {% block body%}
-
-    <header>
-        <section>
-            <img src="{{ url_for('static', filename='image/aliasghar.png') }}" alt="aliasghar">
-            <div>
-                <a href="#">صفحه اصلی</a>
-                <a href="#">محصولات جدید</a>
-                <a href="#">درباره ما</a>
-                <a href="#">محصولات پرفروش</a>
-            </div>
-        </section>
-    </header>
-
+{% include "part/header.html" %}
     <section class="products">
         {% for p in products %}
-            <section class="product-box">
-                <img src="{{ url_for('static', filename='cover/' ~ p.id ~ '.jpg') }}" alt="{{ p.name }}">
-                <span class="tag red"><img src="{{ url_for("static", filename = "theme-image/delivery.png" ) }}">ارسال رایگان</span>
-                <span class="tag blue"><img src="{{ url_for("static", filename = "theme-image/done.png" ) }}">ضمانت اصالت</span>
-                
-                
-                
-                <h3>{{ p.name }}</h3>
-                <p>{{ p.description|truncate(60) }}</p>
-
-                    <a class="blue" href="{{ url_for('general.product_page', id=p.id, name=p.name) }}">
-                    توضیحات بیشتر
-                </a>
-
-                <div style="float: left;">
-                    <a href="/add-to-cart?id={{ p.id }}">افزودن به <img src="{{ url_for("static", filename = "theme-image/cart.png" ) }}"></a>
-                </div>
-            </section>
+    {% include "part/product.html" %}
         {% endfor %}
     </section>
 {% endblock %}

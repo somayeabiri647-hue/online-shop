@@ -114,6 +114,36 @@ header  div {
     float: right;
 }
 
+header div input {
+    width: 320px;
+    height: 46px;
+    margin-left: 20px;
+    padding: 0 20px;
+    font-size: 20px;
+    font-family: Vazirmatn;
+    color: #333;
+    border: none;
+    border-radius: 50px;
+    background: #e8e8e8;
+    box-shadow: inset 4px 4px 8px #c5c5c5,
+                inset -4px -4px 8px #ffffff;
+    transition: all 0.3s ease;
+}
+
+header div input::placeholder {
+    color: #999;
+    font-size: 14px;
+}
+
+header div input:focus {
+    outline: none;
+    width: 360px;
+    background: #f0f0f0;
+    box-shadow: inset 5px 5px 10px #c0c0c0,
+                inset -5px -5px 10px #ffffff,
+                0 0 0 2px rgba(100, 100, 255, 0.2);
+}
+
 header a {
     font-size: 25px;
     color: #1a1a1a;
@@ -245,3 +275,4 @@ a > img {
     border: 1px solid rgba(0, 94, 225, 0.38);
     background: rgba(0, 136, 255, 0.06);
 }
+

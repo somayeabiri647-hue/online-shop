@@ -13,9 +13,6 @@ def main():
 
     if search != None:
         products = products.filter(Product.name.like(f"%{search}%"))
-        
-    product = products.all()
-
 
     return render_template("main.html", products=products, search = search)
 

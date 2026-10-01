@@ -78,6 +78,7 @@
 body {
     padding: 0;
     margin: 0;
+    padding-bottom: 25px;
     font-size: 16px;
     background-color: #E0E0E0;
     color: #363636;
@@ -137,7 +138,7 @@ header div input::placeholder {
 
 header div input:focus {
     outline: none;
-    width: 360px;
+    width: 380px;
     background: #f0f0f0;
     box-shadow: inset 5px 5px 10px #c0c0c0,
                 inset -5px -5px 10px #ffffff,
@@ -165,13 +166,14 @@ header a:hover {
     justify-content: center;
     align-items: stretch;
     margin-top: 20px;
+    gap: 30px 15px;
 }
 
 
 .product-box section{
     max-width: 350px;
     margin: 15px;
-    height: 90%;
+    height: 95%;
     border-radius: 36px;
     background: #e0e0e0;
     box-shadow: 5px 5px 10px #bebebe,
@@ -179,6 +181,15 @@ header a:hover {
     padding-bottom: 16px;
     text-align: right;          /* چون RTL هست، right یعنی سر خط */
     direction: rtl;
+}
+
+.price { 
+    display: block;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: left;
+    margin: 8px 10px;
+    direction: ltr;
 }
 
 .product-box section> img {
@@ -234,7 +245,7 @@ header a:hover {
     color: #fafafa;
     font-size: 16px;         /* ← و این خط */
     font-weight: 500;
-    border-radius: 25px;
+    border-radius: 20px;
     background: #126612;
     border: none;
     position: absolute;

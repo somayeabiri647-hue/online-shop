@@ -257,6 +257,23 @@ header a:hover {
 .add-to-cart-btn:hover {
     background: rgba(0, 0, 0, 0.5);
 }
+
+.add-to-cart-btn2 {
+    display: inline-block;
+    text-align: left;
+    padding: 12px 18px;      /* ← این خط رو تغییر بده */
+    color: #fafafa;
+    font-size: 16px;         /* ← و این خط */
+    font-weight: 500;
+    border-radius: 20px;
+    background: #126612;
+    border: none;
+}
+
+.add-to-cart-btn2:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
 .product-box { 
     position: relative;
 }
@@ -266,7 +283,7 @@ header a:hover {
 }
 
 a {
-    display: flex;
+    display: inline-flex;
     align-items: center;
 }
 
@@ -298,5 +315,9 @@ a > img {
 .tag.blue {
     border: 1px solid rgba(0, 94, 225, 0.38);
     background: rgba(0, 136, 255, 0.06);
+}
+
+.product-detail-box {
+    
 }
 

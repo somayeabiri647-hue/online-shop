@@ -6,13 +6,14 @@
                     <span class="tag blue"><img src="{{ url_for("static", filename = "theme-image/done.png" ) }}">ضمانت اصالت</span>
                     <h3>{{ p.name }}</h3>
                     <p>{{ p.description|truncate(60) }}</p>
-                    <span class="price" style="float: left; padding-left: 10px;" >{{ p.price }}</span>
+                    
                     
     </section>
 </a>
 
-
+    <div>
+    <div class="price" style="float: left; padding-left: 10px;" >{{ p.price }}</div>
     <a class="add-to-cart-btn" href="/add-to-cart?id={{ p.id }}">افزودن به <img
         src="{{ url_for("static", filename = "theme-image/cart.png" ) }}"></a>
-
     </div>
+</div>

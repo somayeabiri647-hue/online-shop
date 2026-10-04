@@ -187,7 +187,7 @@ header a:hover {
     display: block;
     font-size: 22px;
     font-weight: 600;
-    text-align: left;
+    text-align: right;
     margin: 8px 10px;
     direction: ltr;
 }
@@ -260,6 +260,7 @@ header a:hover {
 }
 
 .add-to-cart-btn2 {
+    width: auto;
     display: inline-block;
     text-align: left;
     text-decoration: none;
@@ -273,7 +274,7 @@ header a:hover {
 }
 
 .add-to-cart-btn2:hover {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(10, 88, 0, 0.57);
 }
 
 .product-box { 
@@ -318,6 +319,11 @@ a > img {
     border: 1px solid rgba(0, 94, 225, 0.38);
     background: rgba(0, 136, 255, 0.06);
 }
+.tag.yellow {
+    border: 1px solid rgba(194, 183, 34, 0.355);
+    background: rgba(225, 225, 0, 0.38);
+}
+
 
 .product-detail-box {
     max-width: 1100px;
@@ -335,4 +341,27 @@ a > img {
 
 .product-detail-box > section {
     max-width: 500px;
+    display: block !important;
+    flex-wrap: nowrap !important;
 }
+
+.product-detail-box h1 {
+    margin: 5px;
+    
+}
+
+.product-detail-box h2 {
+    font-size: 20px;
+    margin: 5px;
+
+}
+
+.tags-row {
+    display: flex;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    gap: 4px;
+    align-items: center;
+    padding: 5px 0;
+}
+

@@ -187,7 +187,7 @@ header a:hover {
     display: block;
     font-size: 22px;
     font-weight: 600;
-    text-align: right;
+    text-align: center;
     margin: 8px 10px;
     direction: ltr;
 }
@@ -311,6 +311,12 @@ a > img {
     width: 30px;
     margin-left: 5px;
 }
+.tag.big {
+    font-weight: 400;
+    font-size: 19px;
+    margin: 5px;
+}
+
 .tag.red {
     border: 1px solid rgba(255, 0, 0, 0.219);
     background: rgba(255, 0, 0, 0.06);
@@ -320,8 +326,12 @@ a > img {
     background: rgba(0, 136, 255, 0.06);
 }
 .tag.yellow {
-    border: 1px solid rgba(194, 183, 34, 0.355);
-    background: rgba(225, 225, 0, 0.38);
+    border: 1px solid rgba(148, 139, 15, 0.355);
+    background: rgba(225, 225, 0, 0.292);
+}
+.tag.green {
+    border: 1px solid rgba(15, 100, 21, 0.374);
+    background: rgba(9, 213, 60, 0.286);
 }
 
 
@@ -356,12 +366,12 @@ a > img {
 
 }
 
-.tags-row {
-    display: flex;
-    white-space: nowrap;
-    flex-wrap: nowrap;
-    gap: 4px;
-    align-items: center;
-    padding: 5px 0;
+.product-detail-box .price {
+    font-size: 22px;
+    font-weight: 500;
 }
 
+.product-detail-box .price-box {
+    margin: 20px;
+    text-align: center;
+}
